@@ -1,8 +1,13 @@
+/**
+ * # Catosplace GitHub Ruleset Module
+ * 
+ * TODO: Write description here!!!
+ */
 resource "github_repository_ruleset" "this" {
   for_each = var.repository_rulesets != null ? var.repository_rulesets : {}
 
-  name        = each.value.name
-  repository  = each.value.repository
+  name        = each.key
+  repository  = each.value.repository_name
   target      = each.value.target
   enforcement = each.value.enforcement
 
@@ -13,6 +18,15 @@ resource "github_repository_ruleset" "this" {
         include = conditions.value.ref_name.include
         exclude = conditions.value.ref_name.exclude
       }
+    }
+  }
+
+  dynamic "bypass_actors" {
+    for_each = each.value.bypass_actors == null ? [] : [each.value.bypass_actors]
+    content {
+      actor_id    = bypass_actors.value.actor_id
+      actor_type  = bypass_actors.value.actor_type
+      bypass_mode = bypass_actors.value.bypass_mode
     }
   }
 

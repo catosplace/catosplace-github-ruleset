@@ -3,11 +3,10 @@ module "default_branch_ruleset" {
   source = "../.."
 
   repository_rulesets = {
-    "default_branch" = {
-      repository  = "TODO_REPOSITORY"
-      name        = "default_branch"
-      target      = "branch"
-      enforcement = "active"
+    "default_branch_ruleset" = {
+      repository_name = "TODO_REPOSITORY"
+      target          = "branch"
+      enforcement     = "active"
       conditions = {
         ref_name = {}
       }

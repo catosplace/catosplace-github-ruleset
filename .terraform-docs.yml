@@ -1,0 +1,26 @@
+formatter: "markdown table"
+
+footer-from: "docs/footer.md"
+
+content: |-
+  {{ .Header }}
+
+  {{ .Providers }}
+
+  {{ .Requirements }}
+  
+  ## Example
+
+  ```hcl
+  {{ include "examples/default_branch_ruleset/main.tf" }}
+  ```
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+
+  {{ .Footer }}
+
+output:
+  file: "README.md"
+  mode: "overwrite"
